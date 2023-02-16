@@ -27,40 +27,40 @@ Resources:
       CidrBlock: !Ref PublicSubnetCIDR
       MapPublicIpOnLaunch: true
 
-  InternetGateway:
-    Type: AWS::EC2::InternetGateway
-    Description: The internet gateway to attach to the public subnet
+#   InternetGateway:
+#     Type: AWS::EC2::InternetGateway
+#     Description: The internet gateway to attach to the public subnet
 
-  GatewayAttachement:
-    Type: AWS::EC2::VPCGatewayAttachment
-    Description: Attach the gateway to the subnet
-    Properties:
-      VpcId: !Ref VPCId
-      InternetGatewayId: !Ref InternetGateway
+#   GatewayAttachement:
+#     Type: AWS::EC2::VPCGatewayAttachment
+#     Description: Attach the gateway to the subnet
+#     Properties:
+#       VpcId: !Ref VPCId
+#       InternetGatewayId: !Ref InternetGateway
 
-  PublicRouteTable:
-    Type: AWS::EC2::RouteTable
-    Description: Associate the route table for the subnet
-    Properties:
-      VpcId: !Ref VPCId
+#   PublicRouteTable:
+#     Type: AWS::EC2::RouteTable
+#     Description: Associate the route table for the subnet
+#     Properties:
+#       VpcId: !Ref VPCId
 
-  PublicRoute:
-    Type: AWS::EC2::Route
-    DependsOn: GatewayAttachement
-    Description: Set up the route out to the internet
-    Properties:
-      RouteTableId: !Ref PublicRouteTable
-      DestinationCidrBlock: '0.0.0.0/0'
-      GatewayId: !Ref InternetGateway
+#   PublicRoute:
+#     Type: AWS::EC2::Route
+#     DependsOn: GatewayAttachement
+#     Description: Set up the route out to the internet
+#     Properties:
+#       RouteTableId: !Ref PublicRouteTable
+#       DestinationCidrBlock: '0.0.0.0/0'
+#       GatewayId: !Ref InternetGateway
 
-  PublicSubnetRouteTableAssociation:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Description: Associate the route
-    Properties:
-      SubnetId: !Ref PublicSubnet
-      RouteTableId: !Ref PublicRouteTable
+#   PublicSubnetRouteTableAssociation:
+#     Type: AWS::EC2::SubnetRouteTableAssociation
+#     Description: Associate the route
+#     Properties:
+#       SubnetId: !Ref PublicSubnet
+#       RouteTableId: !Ref PublicRouteTable
 
-Outputs:
-  PublicSubnetId:
-    Description: The subnet id of the public subnet created
-    Value: !Ref PublicSubnet
+# Outputs:
+#   PublicSubnetId:
+#     Description: The subnet id of the public subnet created
+#     Value: !Ref PublicSubnet
